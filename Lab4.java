@@ -18,19 +18,45 @@ public class Lab4 {
 	}; // end declaration and initialization of 2D array
 
 	// Declare String [ ] and int array(s) here
-  final int CLIENTS = 5;
-  String [ ] CLIENTNAME = new String[CLIENTS];
-  int [ ] [ ] CLIENTVALUES = new int[CLIENTS] [3];
-
+  final int CLIENTS = 2;
+  String [ ] clientName = new String[CLIENTS];
+  double [ ] clientInvested = new double[CLIENTS];
+  int [ ] clientRate = new int[CLIENTS];
+  int [ ] clientTerm = new int[CLIENTS];
 	// Declare for loop used for input here
-  for (int name = 0; name < CLIENTS; name++){
-    System.out.print("Please enter the client's values: ");
-    CLIENTNAME[name] = s.nextLine();
+  for (int i = 0; i < CLIENTS; i++){
+    System.out.print("Please enter the name for the client " + (i+1) + " : ");
+    clientName[i] = s.nextLine();
+
+    System.out.print("Enter amount to be invested: ");
+    clientInvested [i] = Double.parseDouble(s.nextLine());
+
+    System.out.print("Enter the interest rate: ");
+    int interestvalue = Integer.parseInt(s.nextLine());
+    int realinterestvalue = interestvalue - 5;
+    clientRate [i] = realinterestvalue;
+
+    System.out.print("Enter the term: ");
+    int termvalue = Integer.parseInt(s.nextLine());
+    int realtvalue = termvalue - 1;
+    clientTerm [i] = realtvalue;
 
   }//end for
 
 
 	// Declare for loop for output here
+  for (int k = 0; k < CLIENTS; k++){
+
+    System.out.print(clientName[k] + "\t");
+    double lookup = table [clientRate[k]][clientTerm[k]];
+    double compoundValue = clientInvested[k] * lookup;
+    System.out.printf("Compound value:$%.2f\t",compoundValue);
+    double interest = compoundValue - clientInvested[k];
+    System.out.printf("Interest:$%.2f", interest);
+    System.out.println("");
+
+  }//end for
+
 
   s.close();
  } // end main
