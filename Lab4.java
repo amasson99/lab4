@@ -19,17 +19,19 @@ public class Lab4 {
 
 	// Declare String [ ] and int array(s) here
   final int CLIENTS = 5;
-
+  String [ ] CLIENTNAME = new String[CLIENTS];
+  int [ ] [ ] CLIENTVALUES = new int[CLIENTS] [3];
 
 	// Declare for loop used for input here
-  for (int i =0; i < CLIENTS; i++){
-
+  for (int name = 0; name < CLIENTS; name++){
+    System.out.print("Please enter the client's values: ");
+    CLIENTNAME[name] = s.nextLine();
 
   }//end for
 
 
 	// Declare for loop for output here
 
-
+  s.close();
  } // end main
 } // end class
