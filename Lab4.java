@@ -4,7 +4,7 @@ public class Lab4 {
   public static void main(String[] args) {
 
 	Scanner s = new Scanner(System.in);
-
+  double lookup =0;
 	double [] [] table = {  {1.05, 1.06, 1.07, 1.08, 1.09, 1.10},//row 1
 				{1.1025, 1.1236, 1.1449, 1.1664, 1.1881, 1.21},	//row 2
 				{1.1576250, 1.1910160, 1.2250430, 1.2597120, 1.2950290, 1.331},	//row 3
@@ -18,7 +18,7 @@ public class Lab4 {
 	}; // end declaration and initialization of 2D array
 
 	// Declare String [ ] and int array(s) here
-  final int CLIENTS = 2;
+  final int CLIENTS = 5;
   String [ ] clientName = new String[CLIENTS];
   double [ ] clientInvested = new double[CLIENTS];
   int [ ] clientRate = new int[CLIENTS];
@@ -30,17 +30,42 @@ public class Lab4 {
 
     System.out.print("Enter amount to be invested: ");
     clientInvested [i] = Double.parseDouble(s.nextLine());
+    if (clientInvested[i] >= 100 && clientInvested[i] <= 10000){
+      //do nothing
+    } else {
+      System.out.println("Invalid, Please re enter");
+      clientInvested[i] = 0.0;
+      System.out.print("Enter amount to be invested: ");
+      clientInvested [i] = Double.parseDouble(s.nextLine());
+    }
 
     System.out.print("Enter the interest rate: ");
     int interestvalue = Integer.parseInt(s.nextLine());
     int realinterestvalue = interestvalue - 5;
     clientRate [i] = realinterestvalue;
+    if (clientRate[i] < 0 || clientRate[i] > 5){
+      System.out.println("Invalid, Please re enter");
+      interestvalue = 0;
+      realinterestvalue = 0;
+      System.out.print("Enter the interest rate: ");
+      interestvalue = Integer.parseInt(s.nextLine());
+      realinterestvalue = interestvalue - 5;
+      clientRate [i] = realinterestvalue;
+    }
 
     System.out.print("Enter the term: ");
     int termvalue = Integer.parseInt(s.nextLine());
     int realtvalue = termvalue - 1;
     clientTerm [i] = realtvalue;
-
+    if(clientTerm[i] <= 1 || clientTerm[i] >= 10){
+      System.out.println("Invalid, Please re enter");
+      System.out.print("Enter the term: ");
+      termvalue = 0;
+      realtvalue = 0;
+      termvalue = Integer.parseInt(s.nextLine());
+      realtvalue = termvalue - 1;
+      clientTerm [i] = realtvalue;
+    }
   }//end for
 
 
@@ -48,11 +73,14 @@ public class Lab4 {
   for (int k = 0; k < CLIENTS; k++){
 
     System.out.print(clientName[k] + "\t");
-    double lookup = table [clientRate[k]][clientTerm[k]];
+
+    lookup = table [clientTerm[k]][clientRate[k]];
     double compoundValue = clientInvested[k] * lookup;
     System.out.printf("Compound value:$%.2f\t",compoundValue);
+
     double interest = compoundValue - clientInvested[k];
     System.out.printf("Interest:$%.2f", interest);
+
     System.out.println("");
 
   }//end for
